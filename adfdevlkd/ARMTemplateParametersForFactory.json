@@ -1,0 +1,309 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfdevlkd"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"LS_ADF_SQLSERVER_password": {
+			"value": ""
+		},
+		"LS_ADLS_PARQUET_accountKey": {
+			"value": ""
+		},
+		"LS_CHILD_MAX_KEY_password": {
+			"value": ""
+		},
+		"LS_CHILD_SS_MAXVALUE_password": {
+			"value": ""
+		},
+		"LS_CPY_CSV_TGT_accountKey": {
+			"value": ""
+		},
+		"LS_CPY_DATA_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_CPY_DATA_TGT_accountKey": {
+			"value": ""
+		},
+		"LS_CPY_XLS_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_FILTER_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_FILTER_SALES_accountKey": {
+			"value": ""
+		},
+		"LS_GMD_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_GMD_SALES_accountKey": {
+			"value": ""
+		},
+		"LS_GMD_SWITCH_accountKey": {
+			"value": ""
+		},
+		"LS_LKUP_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_LKUP_MAXVALUE_password": {
+			"value": ""
+		},
+		"LS_LKUP_SQLSERVER_password": {
+			"value": ""
+		},
+		"LS_MAX_WATERMRK_COLMN_password": {
+			"value": ""
+		},
+		"LS_MF_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_MF_TGT1_accountKey": {
+			"value": ""
+		},
+		"LS_MIGRT_SQLSERVER_password": {
+			"value": ""
+		},
+		"LS_Multifiles_TGT_accountKey": {
+			"value": ""
+		},
+		"LS_Multifiles_TGT1_accountKey": {
+			"value": ""
+		},
+		"LS_Multifiles_TGT2_accountKey": {
+			"value": ""
+		},
+		"LS_Mutlifiles_SRC_accountKey": {
+			"value": ""
+		},
+		"LS_Mutlifiles_TGT3_accountKey": {
+			"value": ""
+		},
+		"LS_OnPrem_SqlServer_DW_password": {
+			"value": ""
+		},
+		"LS_PARENT_SS_password": {
+			"value": ""
+		},
+		"LS_PARENT_SS_MGRT_password": {
+			"value": ""
+		},
+		"LS_SALES_CSV_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_SQLSERVER_ADLS_password": {
+			"value": ""
+		},
+		"LS_SQLSERVER_PARQUET_password": {
+			"value": ""
+		},
+		"LS_SQL_MIGRATION_password": {
+			"value": ""
+		},
+		"LS_Sales_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_SqlTable_Parquet1_accountKey": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://stgaccdevlkd.dfs.core.windows.net/"
+		},
+		"LS_ADF_SQLSERVER_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_ADF_SQLSERVER_properties_typeProperties_database": {
+			"value": "VISIONBOARD"
+		},
+		"LS_ADF_SQLSERVER_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_ADLS_PARQUET_properties_typeProperties_url": {
+			"value": "https://stgaccdevlkd.dfs.core.windows.net/"
+		},
+		"LS_CHILD_MAX_KEY_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_CHILD_MAX_KEY_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_CHILD_MAX_KEY_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_CHILD_SS_MAXVALUE_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_CHILD_SS_MAXVALUE_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_CPY_CSV_TGT_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_CPY_DATA_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_CPY_DATA_TGT_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_CPY_XLS_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_FILTER_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_FILTER_SALES_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_GMD_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_GMD_SALES_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_GMD_SWITCH_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_LKUP_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_LKUP_MAXVALUE_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_LKUP_MAXVALUE_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_LKUP_MAXVALUE_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_LKUP_SQLSERVER_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_LKUP_SQLSERVER_properties_typeProperties_database": {
+			"value": "VISIONBOARD"
+		},
+		"LS_LKUP_SQLSERVER_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_MF_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_MF_TGT1_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_MIGRT_SQLSERVER_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_MIGRT_SQLSERVER_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_MIGRT_SQLSERVER_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_Multifiles_TGT_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_Multifiles_TGT1_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_Multifiles_TGT2_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_Mutlifiles_SRC_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_Mutlifiles_TGT3_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_OnPrem_SqlServer_DW_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_OnPrem_SqlServer_DW_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_OnPrem_SqlServer_DW_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_PARENT_SS_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_PARENT_SS_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_PARENT_SS_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_PARENT_SS_MGRT_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_PARENT_SS_MGRT_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"LS_PARENT_SS_MGRT_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_SALES_CSV_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_SQLSERVER_ADLS_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_SQLSERVER_ADLS_properties_typeProperties_database": {
+			"value": "VISIONBOARD"
+		},
+		"LS_SQLSERVER_ADLS_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_SQLSERVER_PARQUET_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_SQLSERVER_PARQUET_properties_typeProperties_database": {
+			"value": "VISIONBOARD"
+		},
+		"LS_SQLSERVER_PARQUET_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_SQL_MIGRATION_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_SQL_MIGRATION_properties_typeProperties_database": {
+			"value": "VISIONBOARD"
+		},
+		"LS_SQL_MIGRATION_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		},
+		"LS_Sales_ADLS_properties_typeProperties_url": {
+			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_SqlTable_Parquet1_properties_typeProperties_url": {
+			"value": "https://stgaccdevlkd.dfs.core.windows.net/"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "VBMIGDEV"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "lkdvb"
+		}
+	}
+}
