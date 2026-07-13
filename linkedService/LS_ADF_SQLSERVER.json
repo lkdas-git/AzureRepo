@@ -1,0 +1,22 @@
+{
+	"name": "LS_ADF_SQLSERVER",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "linked service adf to sql server",
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "LAPTOP-826T6E8O\\SQLEXPRESS",
+			"database": "VISIONBOARD",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "lkdvb",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxYzhmMDNhOS1jOGEyLTQ5NzYtYjQxMi1iOGIzYTEzZTVkZTUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfhostIntegrationruntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

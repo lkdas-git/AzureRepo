@@ -1,0 +1,23 @@
+{
+	"name": "DS_Multifiles_TGT3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Mutlifiles_TGT3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().name}",
+					"type": "Expression"
+				},
+				"folderPath": "txt",
+				"fileSystem": "outputmultifiles"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,22 @@
+{
+	"name": "DS_Mutlifiles_SRC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Mutlifiles_SRC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().name}",
+					"type": "Expression"
+				},
+				"fileSystem": "inputmultifiles"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

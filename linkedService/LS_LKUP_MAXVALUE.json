@@ -1,0 +1,22 @@
+{
+	"name": "LS_LKUP_MAXVALUE",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Linked storage max value",
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "LAPTOP-826T6E8O\\SQLEXPRESS",
+			"database": "VBMIGDEV",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "lkdvb",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiYzBlMTBkYS0yNjkxLTQxOTEtYTI3MS03MzY2OGM1YmIyYTQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfhostIntegrationruntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"name": "DS_Multifiles_TGT2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Multifiles_TGT2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().name}",
+					"type": "Expression"
+				},
+				"folderPath": "xlsx",
+				"fileSystem": "outputmultifiles"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

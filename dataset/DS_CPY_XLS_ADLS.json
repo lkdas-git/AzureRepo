@@ -1,0 +1,23 @@
+{
+	"name": "DS_CPY_XLS_ADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CPY_XLS_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().name}",
+					"type": "Expression"
+				},
+				"folderPath": "xlsx",
+				"fileSystem": "outboundswitch"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

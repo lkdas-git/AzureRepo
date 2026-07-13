@@ -1,0 +1,23 @@
+{
+	"name": "DS_MF_TGT1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_MF_TGT1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().name}",
+					"type": "Expression"
+				},
+				"folderPath": "csv",
+				"fileSystem": "outputmultifiles"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

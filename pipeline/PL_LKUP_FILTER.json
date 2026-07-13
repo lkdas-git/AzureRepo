@@ -1,0 +1,67 @@
+{
+	"name": "PL_LKUP_FILTER",
+	"properties": {
+		"description": "Pipeline look up filter",
+		"activities": [
+			{
+				"name": "LKPUP_ADLS",
+				"description": "Look up ADLS",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DS_LKUP_ADLS",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Filter_ADLS",
+				"description": "Filter ADLS",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "LKPUP_ADLS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LKPUP_ADLS').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(item().SIC_Code,'1110')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-07-10T12:20:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

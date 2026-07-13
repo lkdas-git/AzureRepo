@@ -1,0 +1,45 @@
+{
+	"name": "PL_SP_SQL_MIGRATION",
+	"properties": {
+		"activities": [
+			{
+				"name": "SP_SQL_MIGRATION",
+				"description": "Stored procedure sql migration",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertCustomer]",
+					"storedProcedureParameters": {
+						"CustomerID": {
+							"value": "1",
+							"type": "Int32"
+						},
+						"FirstName": {
+							"value": "LAXMAN",
+							"type": "String"
+						},
+						"LastName": {
+							"value": "DAS",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_ADF_SQLSERVER",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-07-03T17:23:45Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

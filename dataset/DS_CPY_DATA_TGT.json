@@ -1,0 +1,23 @@
+{
+	"name": "DS_CPY_DATA_TGT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CPY_DATA_TGT",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().name}",
+					"type": "Expression"
+				},
+				"folderPath": "txt",
+				"fileSystem": "outboundswitch"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

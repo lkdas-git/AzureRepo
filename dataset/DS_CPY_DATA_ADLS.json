@@ -1,0 +1,22 @@
+{
+	"name": "DS_CPY_DATA_ADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CPY_DATA_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().name}",
+					"type": "Expression"
+				},
+				"fileSystem": "inputmultifiles"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
