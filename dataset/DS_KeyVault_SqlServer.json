@@ -1,0 +1,12 @@
+{
+	"name": "DS_KeyVault_SqlServer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_KeyVault_SqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
