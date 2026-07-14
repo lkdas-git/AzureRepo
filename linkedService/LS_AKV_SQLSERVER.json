@@ -1,0 +1,11 @@
+{
+	"name": "LS_AKV_SQLSERVER",
+	"properties": {
+		"description": "Linked service Azure key vault",
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://keyvaultlkd.vault.azure.net/"
+		}
+	}
+}
