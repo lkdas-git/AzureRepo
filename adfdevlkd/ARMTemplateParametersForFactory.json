@@ -107,6 +107,9 @@
 		"LS_Sales_ADLS_accountKey": {
 			"value": ""
 		},
+		"LS_Sink_AKV_Parquet_accountKey": {
+			"value": ""
+		},
 		"LS_SqlTable_Parquet1_accountKey": {
 			"value": ""
 		},
@@ -127,6 +130,9 @@
 		},
 		"LS_ADLS_PARQUET_properties_typeProperties_url": {
 			"value": "https://stgaccdevlkd.dfs.core.windows.net/"
+		},
+		"LS_AKV_SQLSERVER_properties_typeProperties_baseUrl": {
+			"value": "https://keyvaultlkd.vault.azure.net/"
 		},
 		"LS_CHILD_MAX_KEY_properties_typeProperties_server": {
 			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
@@ -172,6 +178,15 @@
 		},
 		"LS_GMD_SWITCH_properties_typeProperties_url": {
 			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_server": {
+			"value": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_database": {
+			"value": "VISIONBOARD"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_userName": {
+			"value": "lkdvb"
 		},
 		"LS_LKUP_ADLS_properties_typeProperties_url": {
 			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
@@ -292,6 +307,9 @@
 		},
 		"LS_Sales_ADLS_properties_typeProperties_url": {
 			"value": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_Sink_AKV_Parquet_properties_typeProperties_url": {
+			"value": "https://stgaccdevlkd.dfs.core.windows.net/"
 		},
 		"LS_SqlTable_Parquet1_properties_typeProperties_url": {
 			"value": "https://stgaccdevlkd.dfs.core.windows.net/"

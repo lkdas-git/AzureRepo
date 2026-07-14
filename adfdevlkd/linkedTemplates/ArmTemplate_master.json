@@ -143,6 +143,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_Sales_ADLS'"
 		},
+		"LS_Sink_AKV_Parquet_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_Sink_AKV_Parquet'"
+		},
 		"LS_SqlTable_Parquet1_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SqlTable_Parquet1'"
@@ -170,6 +174,10 @@
 		"LS_ADLS_PARQUET_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://stgaccdevlkd.dfs.core.windows.net/"
+		},
+		"LS_AKV_SQLSERVER_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvaultlkd.vault.azure.net/"
 		},
 		"LS_CHILD_MAX_KEY_properties_typeProperties_server": {
 			"type": "string",
@@ -230,6 +238,18 @@
 		"LS_GMD_SWITCH_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://stgacctmultifiles.dfs.core.windows.net/"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VISIONBOARD"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
 		},
 		"LS_LKUP_ADLS_properties_typeProperties_url": {
 			"type": "string",
@@ -391,6 +411,10 @@
 			"type": "string",
 			"defaultValue": "https://stgacctmultifiles.dfs.core.windows.net/"
 		},
+		"LS_Sink_AKV_Parquet_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://stgaccdevlkd.dfs.core.windows.net/"
+		},
 		"LS_SqlTable_Parquet1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://stgaccdevlkd.dfs.core.windows.net/"
@@ -491,14 +515,14 @@
 					"LS_Mutlifiles_TGT3_accountKey": {
 						"value": "[parameters('LS_Mutlifiles_TGT3_accountKey')]"
 					},
-					"LS_SALES_CSV_ADLS_accountKey": {
-						"value": "[parameters('LS_SALES_CSV_ADLS_accountKey')]"
-					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 					},
 					"LS_ADLS_PARQUET_properties_typeProperties_url": {
 						"value": "[parameters('LS_ADLS_PARQUET_properties_typeProperties_url')]"
+					},
+					"LS_AKV_SQLSERVER_properties_typeProperties_baseUrl": {
+						"value": "[parameters('LS_AKV_SQLSERVER_properties_typeProperties_baseUrl')]"
 					},
 					"LS_CPY_CSV_TGT_properties_typeProperties_url": {
 						"value": "[parameters('LS_CPY_CSV_TGT_properties_typeProperties_url')]"
@@ -550,9 +574,6 @@
 					},
 					"LS_Mutlifiles_TGT3_properties_typeProperties_url": {
 						"value": "[parameters('LS_Mutlifiles_TGT3_properties_typeProperties_url')]"
-					},
-					"LS_SALES_CSV_ADLS_properties_typeProperties_url": {
-						"value": "[parameters('LS_SALES_CSV_ADLS_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -572,8 +593,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"LS_SALES_CSV_ADLS_accountKey": {
+						"value": "[parameters('LS_SALES_CSV_ADLS_accountKey')]"
+					},
 					"LS_Sales_ADLS_accountKey": {
 						"value": "[parameters('LS_Sales_ADLS_accountKey')]"
+					},
+					"LS_Sink_AKV_Parquet_accountKey": {
+						"value": "[parameters('LS_Sink_AKV_Parquet_accountKey')]"
 					},
 					"LS_SqlTable_Parquet1_accountKey": {
 						"value": "[parameters('LS_SqlTable_Parquet1_accountKey')]"
@@ -581,8 +608,14 @@
 					"SqlServer1_password": {
 						"value": "[parameters('SqlServer1_password')]"
 					},
+					"LS_SALES_CSV_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LS_SALES_CSV_ADLS_properties_typeProperties_url')]"
+					},
 					"LS_Sales_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('LS_Sales_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_Sink_AKV_Parquet_properties_typeProperties_url": {
+						"value": "[parameters('LS_Sink_AKV_Parquet_properties_typeProperties_url')]"
 					},
 					"LS_SqlTable_Parquet1_properties_typeProperties_url": {
 						"value": "[parameters('LS_SqlTable_Parquet1_properties_typeProperties_url')]"
@@ -681,6 +714,15 @@
 					},
 					"LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName": {
 						"value": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName')]"
+					},
+					"LS_KeyVault_SqlServer_properties_typeProperties_server": {
+						"value": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_server')]"
+					},
+					"LS_KeyVault_SqlServer_properties_typeProperties_database": {
+						"value": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_database')]"
+					},
+					"LS_KeyVault_SqlServer_properties_typeProperties_userName": {
+						"value": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_userName')]"
 					},
 					"LS_LKUP_MAXVALUE_properties_typeProperties_server": {
 						"value": "[parameters('LS_LKUP_MAXVALUE_properties_typeProperties_server')]"
