@@ -1,0 +1,23 @@
+{
+	"name": "DS_SRC_ETE_SFTP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SRC_ETE_SFTP",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "customers_dataset.csv",
+				"fileSystem": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
