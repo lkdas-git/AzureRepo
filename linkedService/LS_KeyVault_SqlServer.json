@@ -19,10 +19,6 @@
 				},
 				"secretName": "Password"
 			}
-		},
-		"connectVia": {
-			"referenceName": "SelfhostIntegrationruntime",
-			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

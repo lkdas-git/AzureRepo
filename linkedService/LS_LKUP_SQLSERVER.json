@@ -13,10 +13,6 @@
 			"authenticationType": "SQL",
 			"userName": "lkdvb",
 			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI3YjMzOGI3OS00ZDc0LTRiMjgtYTU4Yy1mMDgwYzk5M2ZhOWMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
-		},
-		"connectVia": {
-			"referenceName": "SelfhostIntegrationruntime",
-			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

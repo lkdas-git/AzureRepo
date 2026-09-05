@@ -1,0 +1,29 @@
+{
+	"name": "DS_LKP_ETE_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_LKP_ETE_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "table_schema",
+				"type": "varchar"
+			},
+			{
+				"name": "table_name",
+				"type": "varchar"
+			},
+			{
+				"name": "table_type",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TBL_CONFIG"
+		}
+	}
+}
