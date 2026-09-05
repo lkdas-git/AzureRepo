@@ -1,0 +1,12 @@
+{
+	"name": "DS_LKP_ETE_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_LKP_ETE_SQLSRVR",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
