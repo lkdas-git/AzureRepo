@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevlax"
 		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
 		"LS_ADF_SQLSERVER_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_ADF_SQLSERVER'"
@@ -31,21 +35,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_MAX_WATERMRK_COLMN'"
 		},
-		"LS_MIGRT_SQLSERVER_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_MIGRT_SQLSERVER'"
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
 		},
-		"LS_OnPrem_SqlServer_DW_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_OnPrem_SqlServer_DW'"
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VBMIGDEV"
 		},
-		"LS_PARENT_SS_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_PARENT_SS'"
-		},
-		"LS_PARENT_SS_MGRT_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_PARENT_SS_MGRT'"
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
 		},
 		"LS_ADF_SQLSERVER_properties_typeProperties_server": {
 			"type": "string",
@@ -130,60 +130,45 @@
 		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "lkdvb"
-		},
-		"LS_MIGRT_SQLSERVER_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_MIGRT_SQLSERVER_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VBMIGDEV"
-		},
-		"LS_MIGRT_SQLSERVER_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
-		},
-		"LS_OnPrem_SqlServer_DW_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_OnPrem_SqlServer_DW_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VBMIGDEV"
-		},
-		"LS_OnPrem_SqlServer_DW_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
-		},
-		"LS_PARENT_SS_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_PARENT_SS_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VBMIGDEV"
-		},
-		"LS_PARENT_SS_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
-		},
-		"LS_PARENT_SS_MGRT_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_PARENT_SS_MGRT_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VBMIGDEV"
-		},
-		"LS_PARENT_SS_MGRT_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer1_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer1_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SelfhostIntegrationruntime')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"description": "self host integration run time",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_DEV_ETE_RESTAPI')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -197,6 +182,53 @@
 				"type": "RestResource",
 				"typeProperties": {},
 				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SRC_ETE_CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SRC_ETE_CSV",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "order_payments_dataset.csv",
+						"fileSystem": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "order_id",
+						"type": "String"
+					},
+					{
+						"name": "payment_sequential",
+						"type": "String"
+					},
+					{
+						"name": "payment_type",
+						"type": "String"
+					},
+					{
+						"name": "payment_installments",
+						"type": "String"
+					},
+					{
+						"name": "payment_value",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		},
@@ -411,6 +443,32 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_TGT_ETE_CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_TGT_ETE_CSV",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@concat(\n'csv/',\nformatDateTime(utcNow(),'yyyy'),'/',\nformatDateTime(utcNow(),'MM'),'/',\nformatDateTime(utcNow(),'dd'),'/'\n)\n",
+							"type": "Expression"
+						},
+						"fileSystem": "output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_TGT_ETE_CSV1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -560,7 +618,9 @@
 					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_CHILD_MAX_KEY')]",
@@ -587,7 +647,9 @@
 					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_CHILD_SS_MAXVALUE')]",
@@ -614,7 +676,9 @@
 					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_KeyVault_SqlServer')]",
@@ -645,7 +709,9 @@
 					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_LKUP_MAXVALUE')]",
@@ -672,7 +738,9 @@
 					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_LKUP_SQLSERVER')]",
@@ -699,7 +767,9 @@
 					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_MAX_WATERMRK_COLMN')]",
@@ -726,115 +796,9 @@
 					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_MIGRT_SQLSERVER')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked service migrate sql server",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_MIGRT_SQLSERVER_properties_typeProperties_server')]",
-					"database": "[parameters('LS_MIGRT_SQLSERVER_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_MIGRT_SQLSERVER_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_MIGRT_SQLSERVER_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_OnPrem_SqlServer_DW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked service on premises sql server datawarehouse",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_OnPrem_SqlServer_DW_properties_typeProperties_server')]",
-					"database": "[parameters('LS_OnPrem_SqlServer_DW_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_OnPrem_SqlServer_DW_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_OnPrem_SqlServer_DW_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_PARENT_SS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked service parent sql server",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_PARENT_SS_properties_typeProperties_server')]",
-					"database": "[parameters('LS_PARENT_SS_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_PARENT_SS_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_PARENT_SS_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_PARENT_SS_MGRT')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked service sql server migration to ADLS",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_PARENT_SS_MGRT_properties_typeProperties_server')]",
-					"database": "[parameters('LS_PARENT_SS_MGRT_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_PARENT_SS_MGRT_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_PARENT_SS_MGRT_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
+			]
 		}
 	]
 }

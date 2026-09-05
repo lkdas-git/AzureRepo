@@ -113,6 +113,9 @@
 		"LS_SQL_MIGRATION_password": {
 			"value": ""
 		},
+		"LS_SRC_ETE_CSV_accountKey": {
+			"value": ""
+		},
 		"LS_SRC_ETE_CSV1_accountKey": {
 			"value": ""
 		},
@@ -135,6 +138,9 @@
 			"value": ""
 		},
 		"LS_SqlTable_Parquet1_accountKey": {
+			"value": ""
+		},
+		"LS_TGT_ETE_CSV_accountKey": {
 			"value": ""
 		},
 		"LS_TGT_ETE_CSV1_accountKey": {
@@ -353,6 +359,9 @@
 		"LS_SQL_MIGRATION_properties_typeProperties_userName": {
 			"value": "lkdvb"
 		},
+		"LS_SRC_ETE_CSV_properties_typeProperties_url": {
+			"value": "https://adlsdevlax.dfs.core.windows.net/"
+		},
 		"LS_SRC_ETE_CSV1_properties_typeProperties_url": {
 			"value": "https://adlsdevlax.dfs.core.windows.net/"
 		},
@@ -376,6 +385,9 @@
 		},
 		"LS_SqlTable_Parquet1_properties_typeProperties_url": {
 			"value": "https://stgaccdevlkd.dfs.core.windows.net/"
+		},
+		"LS_TGT_ETE_CSV_properties_typeProperties_url": {
+			"value": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_CSV1_properties_typeProperties_url": {
 			"value": "https://adlsdevlax.dfs.core.windows.net/"
