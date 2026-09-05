@@ -119,6 +119,9 @@
 		"LS_SRC_ETE_EXCEL_accountKey": {
 			"value": ""
 		},
+		"LS_SRC_ETE_EXCEL1_accountKey": {
+			"value": ""
+		},
 		"LS_SRC_ETE_SFTP_accountKey": {
 			"value": ""
 		},
@@ -135,6 +138,9 @@
 			"value": ""
 		},
 		"LS_TGT_ETE_EXCEL_accountKey": {
+			"value": ""
+		},
+		"LS_TGT_ETE_EXCEL1_accountKey": {
 			"value": ""
 		},
 		"LS_TGT_ETE_SFTP_accountKey": {
@@ -347,6 +353,9 @@
 		"LS_SRC_ETE_EXCEL_properties_typeProperties_url": {
 			"value": "https://adlsdevlax.dfs.core.windows.net/"
 		},
+		"LS_SRC_ETE_EXCEL1_properties_typeProperties_url": {
+			"value": "https://adlsdevlax.dfs.core.windows.net/"
+		},
 		"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 			"value": "https://adlsdevlax.dfs.core.windows.net/"
 		},
@@ -363,6 +372,9 @@
 			"value": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_EXCEL_properties_typeProperties_url": {
+			"value": "https://adlsdevlax.dfs.core.windows.net/"
+		},
+		"LS_TGT_ETE_EXCEL1_properties_typeProperties_url": {
 			"value": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_SFTP_properties_typeProperties_url": {

@@ -159,6 +159,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_EXCEL'"
 		},
+		"LS_SRC_ETE_EXCEL1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_EXCEL1'"
+		},
 		"LS_SRC_ETE_SFTP_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_SFTP'"
@@ -182,6 +186,10 @@
 		"LS_TGT_ETE_EXCEL_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_EXCEL'"
+		},
+		"LS_TGT_ETE_EXCEL1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_EXCEL1'"
 		},
 		"LS_TGT_ETE_SFTP_accountKey": {
 			"type": "secureString",
@@ -463,6 +471,10 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
+		"LS_SRC_ETE_EXCEL1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
 		"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
@@ -484,6 +496,10 @@
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_EXCEL_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
+		"LS_TGT_ETE_EXCEL1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
@@ -583,6 +599,80 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_SRC_ETE_CSV1')]",
 				"[concat(variables('factoryId'), '/datasets/DS_TGT_ETE_CSV1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_CPY_ETE_EXCEL1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Copy excel to ADLS",
+				"activities": [
+					{
+						"name": "PL_CPY_ETE_EXCEL1",
+						"description": "Copy excel to ADLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_SRC_ETE_EXCEL1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_TGT_ETE_EXCEL1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SRC_ETE_EXCEL1')]",
+				"[concat(variables('factoryId'), '/datasets/DS_TGT_ETE_EXCEL1')]"
 			]
 		},
 		{
@@ -738,6 +828,31 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_SRC_ETE_EXCEL1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SRC_ETE_EXCEL1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Worksheet",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "order_reviews_dataset.xlsx",
+						"fileSystem": "input"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_SRC_ETE_EXCEL1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_SRC_ETE_SFTP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -812,6 +927,34 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/LS_TGT_ETE_CSV1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_TGT_ETE_EXCEL1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_TGT_ETE_EXCEL1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@concat(\n'excel/',\nformatDateTime(utcNow(),'yyyy'),'/',\nformatDateTime(utcNow(),'MM'),'/',\nformatDateTime(utcNow(),'dd'),'/'\n)\n",
+							"type": "Expression"
+						},
+						"fileSystem": "output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_TGT_ETE_EXCEL1')]"
 			]
 		},
 		{
@@ -1721,6 +1864,24 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_SRC_ETE_EXCEL1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service for excel",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_SRC_ETE_EXCEL1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_SRC_ETE_EXCEL1_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LS_SRC_ETE_SFTP')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1823,6 +1984,24 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_TGT_ETE_EXCEL_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_TGT_ETE_EXCEL1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service for target Excel",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_TGT_ETE_EXCEL1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_TGT_ETE_EXCEL1_accountKey')]"
 					}
 				}
 			},
