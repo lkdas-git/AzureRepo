@@ -51,6 +51,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_JASON'"
 		},
+		"LS_SRC_ETE_RESTAPI_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_RESTAPI'"
+		},
 		"LS_SRC_ETE_SFTP_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_SFTP'"
@@ -82,10 +86,6 @@
 		"LS_TGT_ETE_EXCEL_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_EXCEL'"
-		},
-		"LS_TGT_ETE_EXCEL1_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_EXCEL1'"
 		},
 		"LS_Mutlifiles_SRC_properties_typeProperties_url": {
 			"type": "string",
@@ -127,6 +127,10 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
+		"LS_SRC_ETE_RESTAPI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
 		"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
@@ -156,10 +160,6 @@
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_EXCEL_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
-		},
-		"LS_TGT_ETE_EXCEL1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		}
@@ -362,6 +362,24 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_SRC_ETE_RESTAPI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service for rest apiu",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_SRC_ETE_RESTAPI_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_SRC_ETE_RESTAPI_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LS_SRC_ETE_SFTP')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -500,24 +518,6 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_TGT_ETE_EXCEL_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_TGT_ETE_EXCEL1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked service for target Excel",
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_TGT_ETE_EXCEL1_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('LS_TGT_ETE_EXCEL1_accountKey')]"
 					}
 				}
 			},

@@ -7,6 +7,18 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevlax"
 		},
+		"LS_ADF_SQLSERVER_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_ADF_SQLSERVER'"
+		},
+		"LS_CHILD_MAX_KEY_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_CHILD_MAX_KEY'"
+		},
+		"LS_CHILD_SS_MAXVALUE_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_CHILD_SS_MAXVALUE'"
+		},
 		"LS_LKUP_MAXVALUE_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_LKUP_MAXVALUE'"
@@ -46,6 +58,42 @@
 		"LS_SQL_MIGRATION_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SQL_MIGRATION'"
+		},
+		"LS_ADF_SQLSERVER_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_ADF_SQLSERVER_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VISIONBOARD"
+		},
+		"LS_ADF_SQLSERVER_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
+		},
+		"LS_CHILD_MAX_KEY_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_CHILD_MAX_KEY_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VBMIGDEV"
+		},
+		"LS_CHILD_MAX_KEY_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
+		},
+		"LS_CHILD_SS_MAXVALUE_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_CHILD_SS_MAXVALUE_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VBMIGDEV"
+		},
+		"LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
 		},
 		"LS_KeyVault_SqlServer_properties_typeProperties_server": {
 			"type": "string",
@@ -184,6 +232,87 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ADF_SQLSERVER')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "linked service adf to sql server",
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_server')]",
+					"database": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_ADF_SQLSERVER_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfhostIntegrationruntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_CHILD_MAX_KEY')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service max key",
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_server')]",
+					"database": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_CHILD_MAX_KEY_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfhostIntegrationruntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_CHILD_SS_MAXVALUE')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Child linked service to get water mark max value",
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_server')]",
+					"database": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_CHILD_SS_MAXVALUE_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfhostIntegrationruntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_KeyVault_SqlServer')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -845,15 +974,15 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_CPY_ETE_SFTP')]",
+			"name": "[concat(parameters('factoryName'), '/PL_CPY_ETE_RESTAPI')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Copy sftp file to ADLS ",
+				"description": "Restapi ",
 				"activities": [
 					{
-						"name": "PL_CPY_ETE_SFTP",
-						"description": "Copy sftp file to ADLS ",
+						"name": "PL_CPY_ETE_RESTAPI",
+						"description": "restapi",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -866,14 +995,12 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
 								}
 							},
 							"sink": {
@@ -885,26 +1012,18 @@
 									"type": "ParquetWriteSettings"
 								}
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
+							"enableStaging": false
 						},
 						"inputs": [
 							{
-								"referenceName": "DS_SRC_ETE_SFTP",
+								"referenceName": "DS_DEV_ETE_RESTAPI",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DS_TGT_ETE_SFTP",
+								"referenceName": "DS_TGT_ETE_RESTAPI",
 								"type": "DatasetReference",
 								"parameters": {}
 							}

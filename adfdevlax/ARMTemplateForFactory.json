@@ -175,6 +175,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_JASON'"
 		},
+		"LS_SRC_ETE_RESTAPI_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_RESTAPI'"
+		},
 		"LS_SRC_ETE_SFTP_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_SFTP'"
@@ -214,6 +218,10 @@
 		"LS_TGT_ETE_JASON_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_JASON'"
+		},
+		"LS_TGT_ETE_RESTAPI_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_RESTAPI'"
 		},
 		"LS_TGT_ETE_SFTP_accountKey": {
 			"type": "secureString",
@@ -511,6 +519,10 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
+		"LS_SRC_ETE_RESTAPI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
 		"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
@@ -548,6 +560,10 @@
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_JASON_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
+		"LS_TGT_ETE_RESTAPI_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
@@ -944,6 +960,73 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_SRC_ETE_JASON')]",
 				"[concat(variables('factoryId'), '/datasets/DS_TGT_ETE_JASON')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_CPY_ETE_RESTAPI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Restapi ",
+				"activities": [
+					{
+						"name": "PL_CPY_ETE_RESTAPI",
+						"description": "restapi",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_DEV_ETE_RESTAPI",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_TGT_ETE_RESTAPI",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_DEV_ETE_RESTAPI')]",
+				"[concat(variables('factoryId'), '/datasets/DS_TGT_ETE_RESTAPI')]"
 			]
 		},
 		{
@@ -1519,6 +1602,34 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_TGT_ETE_RESTAPI')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_TGT_ETE_RESTAPI",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@concat(\n'restapi/',\nformatDateTime(utcNow(),'yyyy'),'/',\nformatDateTime(utcNow(),'MM'),'/',\nformatDateTime(utcNow(),'dd'),'/'\n)\n",
+							"type": "Expression"
+						},
+						"fileSystem": "output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_TGT_ETE_RESTAPI')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_TGT_ETE_SFTP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1759,6 +1870,7 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "linked service  for rest api",
 				"annotations": [],
 				"type": "RestService",
 				"typeProperties": {
@@ -2497,6 +2609,24 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_SRC_ETE_RESTAPI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service for rest apiu",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_SRC_ETE_RESTAPI_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_SRC_ETE_RESTAPI_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LS_SRC_ETE_SFTP')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -2671,6 +2801,24 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_TGT_ETE_JASON_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_TGT_ETE_RESTAPI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service for rest api",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_TGT_ETE_RESTAPI_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_TGT_ETE_RESTAPI_accountKey')]"
 					}
 				}
 			},

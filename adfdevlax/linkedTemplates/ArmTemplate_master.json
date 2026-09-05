@@ -175,6 +175,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_JASON'"
 		},
+		"LS_SRC_ETE_RESTAPI_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_RESTAPI'"
+		},
 		"LS_SRC_ETE_SFTP_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_SFTP'"
@@ -214,6 +218,10 @@
 		"LS_TGT_ETE_JASON_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_JASON'"
+		},
+		"LS_TGT_ETE_RESTAPI_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_RESTAPI'"
 		},
 		"LS_TGT_ETE_SFTP_accountKey": {
 			"type": "secureString",
@@ -511,6 +519,10 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
+		"LS_SRC_ETE_RESTAPI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
 		"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
@@ -548,6 +560,10 @@
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_JASON_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
+		"LS_TGT_ETE_RESTAPI_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
@@ -759,6 +775,9 @@
 					"LS_SRC_ETE_JASON_accountKey": {
 						"value": "[parameters('LS_SRC_ETE_JASON_accountKey')]"
 					},
+					"LS_SRC_ETE_RESTAPI_accountKey": {
+						"value": "[parameters('LS_SRC_ETE_RESTAPI_accountKey')]"
+					},
 					"LS_SRC_ETE_SFTP_accountKey": {
 						"value": "[parameters('LS_SRC_ETE_SFTP_accountKey')]"
 					},
@@ -782,9 +801,6 @@
 					},
 					"LS_TGT_ETE_EXCEL_accountKey": {
 						"value": "[parameters('LS_TGT_ETE_EXCEL_accountKey')]"
-					},
-					"LS_TGT_ETE_EXCEL1_accountKey": {
-						"value": "[parameters('LS_TGT_ETE_EXCEL1_accountKey')]"
 					},
 					"LS_Mutlifiles_SRC_properties_typeProperties_url": {
 						"value": "[parameters('LS_Mutlifiles_SRC_properties_typeProperties_url')]"
@@ -816,6 +832,9 @@
 					"LS_SRC_ETE_JASON_properties_typeProperties_url": {
 						"value": "[parameters('LS_SRC_ETE_JASON_properties_typeProperties_url')]"
 					},
+					"LS_SRC_ETE_RESTAPI_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_ETE_RESTAPI_properties_typeProperties_url')]"
+					},
 					"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 						"value": "[parameters('LS_SRC_ETE_SFTP_properties_typeProperties_url')]"
 					},
@@ -839,9 +858,6 @@
 					},
 					"LS_TGT_ETE_EXCEL_properties_typeProperties_url": {
 						"value": "[parameters('LS_TGT_ETE_EXCEL_properties_typeProperties_url')]"
-					},
-					"LS_TGT_ETE_EXCEL1_properties_typeProperties_url": {
-						"value": "[parameters('LS_TGT_ETE_EXCEL1_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -863,8 +879,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"LS_TGT_ETE_EXCEL1_accountKey": {
+						"value": "[parameters('LS_TGT_ETE_EXCEL1_accountKey')]"
+					},
 					"LS_TGT_ETE_JASON_accountKey": {
 						"value": "[parameters('LS_TGT_ETE_JASON_accountKey')]"
+					},
+					"LS_TGT_ETE_RESTAPI_accountKey": {
+						"value": "[parameters('LS_TGT_ETE_RESTAPI_accountKey')]"
 					},
 					"LS_TGT_ETE_SFTP_accountKey": {
 						"value": "[parameters('LS_TGT_ETE_SFTP_accountKey')]"
@@ -872,17 +894,14 @@
 					"SqlServer1_password": {
 						"value": "[parameters('SqlServer1_password')]"
 					},
-					"LS_ADF_SQLSERVER_password": {
-						"value": "[parameters('LS_ADF_SQLSERVER_password')]"
-					},
-					"LS_CHILD_MAX_KEY_password": {
-						"value": "[parameters('LS_CHILD_MAX_KEY_password')]"
-					},
-					"LS_CHILD_SS_MAXVALUE_password": {
-						"value": "[parameters('LS_CHILD_SS_MAXVALUE_password')]"
+					"LS_TGT_ETE_EXCEL1_properties_typeProperties_url": {
+						"value": "[parameters('LS_TGT_ETE_EXCEL1_properties_typeProperties_url')]"
 					},
 					"LS_TGT_ETE_JASON_properties_typeProperties_url": {
 						"value": "[parameters('LS_TGT_ETE_JASON_properties_typeProperties_url')]"
+					},
+					"LS_TGT_ETE_RESTAPI_properties_typeProperties_url": {
+						"value": "[parameters('LS_TGT_ETE_RESTAPI_properties_typeProperties_url')]"
 					},
 					"LS_TGT_ETE_SFTP_properties_typeProperties_url": {
 						"value": "[parameters('LS_TGT_ETE_SFTP_properties_typeProperties_url')]"
@@ -895,33 +914,6 @@
 					},
 					"SqlServer1_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
-					},
-					"LS_ADF_SQLSERVER_properties_typeProperties_server": {
-						"value": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_server')]"
-					},
-					"LS_ADF_SQLSERVER_properties_typeProperties_database": {
-						"value": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_database')]"
-					},
-					"LS_ADF_SQLSERVER_properties_typeProperties_userName": {
-						"value": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_userName')]"
-					},
-					"LS_CHILD_MAX_KEY_properties_typeProperties_server": {
-						"value": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_server')]"
-					},
-					"LS_CHILD_MAX_KEY_properties_typeProperties_database": {
-						"value": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_database')]"
-					},
-					"LS_CHILD_MAX_KEY_properties_typeProperties_userName": {
-						"value": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_userName')]"
-					},
-					"LS_CHILD_SS_MAXVALUE_properties_typeProperties_server": {
-						"value": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_server')]"
-					},
-					"LS_CHILD_SS_MAXVALUE_properties_typeProperties_database": {
-						"value": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_database')]"
-					},
-					"LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName": {
-						"value": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -942,6 +934,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"LS_ADF_SQLSERVER_password": {
+						"value": "[parameters('LS_ADF_SQLSERVER_password')]"
+					},
+					"LS_CHILD_MAX_KEY_password": {
+						"value": "[parameters('LS_CHILD_MAX_KEY_password')]"
+					},
+					"LS_CHILD_SS_MAXVALUE_password": {
+						"value": "[parameters('LS_CHILD_SS_MAXVALUE_password')]"
 					},
 					"LS_LKUP_MAXVALUE_password": {
 						"value": "[parameters('LS_LKUP_MAXVALUE_password')]"
@@ -972,6 +973,33 @@
 					},
 					"LS_SQL_MIGRATION_password": {
 						"value": "[parameters('LS_SQL_MIGRATION_password')]"
+					},
+					"LS_ADF_SQLSERVER_properties_typeProperties_server": {
+						"value": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_server')]"
+					},
+					"LS_ADF_SQLSERVER_properties_typeProperties_database": {
+						"value": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_database')]"
+					},
+					"LS_ADF_SQLSERVER_properties_typeProperties_userName": {
+						"value": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_userName')]"
+					},
+					"LS_CHILD_MAX_KEY_properties_typeProperties_server": {
+						"value": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_server')]"
+					},
+					"LS_CHILD_MAX_KEY_properties_typeProperties_database": {
+						"value": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_database')]"
+					},
+					"LS_CHILD_MAX_KEY_properties_typeProperties_userName": {
+						"value": "[parameters('LS_CHILD_MAX_KEY_properties_typeProperties_userName')]"
+					},
+					"LS_CHILD_SS_MAXVALUE_properties_typeProperties_server": {
+						"value": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_server')]"
+					},
+					"LS_CHILD_SS_MAXVALUE_properties_typeProperties_database": {
+						"value": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_database')]"
+					},
+					"LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName": {
+						"value": "[parameters('LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName')]"
 					},
 					"LS_KeyVault_SqlServer_properties_typeProperties_server": {
 						"value": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_server')]"
@@ -1076,6 +1104,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'adfdevlax_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "adfdevlax_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevlax_ArmTemplate_3')]"
 			]
 		}
 	]
