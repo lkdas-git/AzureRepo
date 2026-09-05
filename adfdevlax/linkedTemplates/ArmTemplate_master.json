@@ -163,6 +163,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_EXCEL1'"
 		},
+		"LS_SRC_ETE_JASON_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_JASON'"
+		},
 		"LS_SRC_ETE_SFTP_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_ETE_SFTP'"
@@ -190,6 +194,10 @@
 		"LS_TGT_ETE_EXCEL1_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_EXCEL1'"
+		},
+		"LS_TGT_ETE_JASON_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_JASON'"
 		},
 		"LS_TGT_ETE_SFTP_accountKey": {
 			"type": "secureString",
@@ -475,6 +483,10 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
+		"LS_SRC_ETE_JASON_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
 		"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
@@ -500,6 +512,10 @@
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"LS_TGT_ETE_EXCEL1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
+		},
+		"LS_TGT_ETE_JASON_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
@@ -702,6 +718,9 @@
 					"LS_SRC_ETE_EXCEL1_accountKey": {
 						"value": "[parameters('LS_SRC_ETE_EXCEL1_accountKey')]"
 					},
+					"LS_SRC_ETE_JASON_accountKey": {
+						"value": "[parameters('LS_SRC_ETE_JASON_accountKey')]"
+					},
 					"LS_SRC_ETE_SFTP_accountKey": {
 						"value": "[parameters('LS_SRC_ETE_SFTP_accountKey')]"
 					},
@@ -722,6 +741,9 @@
 					},
 					"LS_TGT_ETE_EXCEL1_accountKey": {
 						"value": "[parameters('LS_TGT_ETE_EXCEL1_accountKey')]"
+					},
+					"LS_TGT_ETE_JASON_accountKey": {
+						"value": "[parameters('LS_TGT_ETE_JASON_accountKey')]"
 					},
 					"LS_TGT_ETE_SFTP_accountKey": {
 						"value": "[parameters('LS_TGT_ETE_SFTP_accountKey')]"
@@ -750,6 +772,9 @@
 					"LS_SRC_ETE_EXCEL1_properties_typeProperties_url": {
 						"value": "[parameters('LS_SRC_ETE_EXCEL1_properties_typeProperties_url')]"
 					},
+					"LS_SRC_ETE_JASON_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_ETE_JASON_properties_typeProperties_url')]"
+					},
 					"LS_SRC_ETE_SFTP_properties_typeProperties_url": {
 						"value": "[parameters('LS_SRC_ETE_SFTP_properties_typeProperties_url')]"
 					},
@@ -770,6 +795,9 @@
 					},
 					"LS_TGT_ETE_EXCEL1_properties_typeProperties_url": {
 						"value": "[parameters('LS_TGT_ETE_EXCEL1_properties_typeProperties_url')]"
+					},
+					"LS_TGT_ETE_JASON_properties_typeProperties_url": {
+						"value": "[parameters('LS_TGT_ETE_JASON_properties_typeProperties_url')]"
 					},
 					"LS_TGT_ETE_SFTP_properties_typeProperties_url": {
 						"value": "[parameters('LS_TGT_ETE_SFTP_properties_typeProperties_url')]"
@@ -832,15 +860,6 @@
 					},
 					"LS_PARENT_SS_MGRT_password": {
 						"value": "[parameters('LS_PARENT_SS_MGRT_password')]"
-					},
-					"LS_SQLSERVER_ADLS_password": {
-						"value": "[parameters('LS_SQLSERVER_ADLS_password')]"
-					},
-					"LS_SQLSERVER_PARQUET_password": {
-						"value": "[parameters('LS_SQLSERVER_PARQUET_password')]"
-					},
-					"LS_SQL_MIGRATION_password": {
-						"value": "[parameters('LS_SQL_MIGRATION_password')]"
 					},
 					"LS_ADF_SQLSERVER_properties_typeProperties_server": {
 						"value": "[parameters('LS_ADF_SQLSERVER_properties_typeProperties_server')]"
@@ -940,6 +959,35 @@
 					},
 					"LS_PARENT_SS_MGRT_properties_typeProperties_userName": {
 						"value": "[parameters('LS_PARENT_SS_MGRT_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevlax_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "adfdevlax_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_SQLSERVER_ADLS_password": {
+						"value": "[parameters('LS_SQLSERVER_ADLS_password')]"
+					},
+					"LS_SQLSERVER_PARQUET_password": {
+						"value": "[parameters('LS_SQLSERVER_PARQUET_password')]"
+					},
+					"LS_SQL_MIGRATION_password": {
+						"value": "[parameters('LS_SQL_MIGRATION_password')]"
 					},
 					"LS_SQLSERVER_ADLS_properties_typeProperties_server": {
 						"value": "[parameters('LS_SQLSERVER_ADLS_properties_typeProperties_server')]"
@@ -967,26 +1015,6 @@
 					},
 					"LS_SQL_MIGRATION_properties_typeProperties_userName": {
 						"value": "[parameters('LS_SQL_MIGRATION_properties_typeProperties_userName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'adfdevlax_ArmTemplate_1')]"
-			]
-		},
-		{
-			"name": "adfdevlax_ArmTemplate_3",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2024-03-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					}
 				}
 			},
