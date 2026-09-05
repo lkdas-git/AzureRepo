@@ -1,0 +1,20 @@
+{
+	"name": "DS_SRC_ETE_EXCEL1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SRC_ETE_EXCEL1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Worksheet",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "order_reviews_dataset.xlsx",
+				"fileSystem": "input"
+			}
+		},
+		"schema": []
+	}
+}
