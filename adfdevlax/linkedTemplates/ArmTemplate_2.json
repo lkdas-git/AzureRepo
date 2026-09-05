@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevlax"
 		},
+		"LS_TGT_ETE_JASON_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_JASON'"
+		},
+		"LS_TGT_ETE_SFTP_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_TGT_ETE_SFTP'"
+		},
 		"SqlServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServer1'"
@@ -23,17 +31,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_CHILD_SS_MAXVALUE'"
 		},
-		"LS_LKUP_MAXVALUE_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_LKUP_MAXVALUE'"
+		"LS_TGT_ETE_JASON_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
-		"LS_LKUP_SQLSERVER_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_LKUP_SQLSERVER'"
-		},
-		"LS_MAX_WATERMRK_COLMN_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_MAX_WATERMRK_COLMN'"
+		"LS_TGT_ETE_SFTP_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevlax.dfs.core.windows.net/"
 		},
 		"SqlServer1_properties_typeProperties_server": {
 			"type": "string",
@@ -82,60 +86,48 @@
 		"LS_CHILD_SS_MAXVALUE_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "lkdvb"
-		},
-		"LS_KeyVault_SqlServer_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_KeyVault_SqlServer_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VISIONBOARD"
-		},
-		"LS_KeyVault_SqlServer_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
-		},
-		"LS_LKUP_MAXVALUE_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_LKUP_MAXVALUE_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VBMIGDEV"
-		},
-		"LS_LKUP_MAXVALUE_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
-		},
-		"LS_LKUP_SQLSERVER_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_LKUP_SQLSERVER_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VISIONBOARD"
-		},
-		"LS_LKUP_SQLSERVER_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
-		},
-		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
-		},
-		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "VBMIGDEV"
-		},
-		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "lkdvb"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_TGT_ETE_JASON')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service Jason",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_TGT_ETE_JASON_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_TGT_ETE_JASON_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_TGT_ETE_SFTP')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service for SFTP",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_TGT_ETE_SFTP_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_TGT_ETE_SFTP_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -182,6 +174,53 @@
 				"type": "RestResource",
 				"typeProperties": {},
 				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SRC_CTE_BLKUPLD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SRC_CTE_BLKUPLD",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "geolocation_dataset.csv",
+						"fileSystem": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "geolocation_zip_code_prefix",
+						"type": "String"
+					},
+					{
+						"name": "geolocation_lat",
+						"type": "String"
+					},
+					{
+						"name": "geolocation_lng",
+						"type": "String"
+					},
+					{
+						"name": "geolocation_city",
+						"type": "String"
+					},
+					{
+						"name": "geolocation_state",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		},
@@ -443,6 +482,32 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_TGT_CTE_BLKUPLD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_TGT_CTE_BLKUPLD",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@concat(\n'blkupld/',\nformatDateTime(utcNow(),'yyyy'),'/',\nformatDateTime(utcNow(),'MM'),'/',\nformatDateTime(utcNow(),'dd'),'/'\n)\n",
+							"type": "Expression"
+						},
+						"fileSystem": "output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_TGT_ETE_CSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -565,7 +630,9 @@
 				},
 				"schema": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_TGT_ETE_JASON')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_TGT_ETE_SFTP')]",
@@ -591,7 +658,9 @@
 				},
 				"schema": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_TGT_ETE_SFTP')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_ADF_SQLSERVER')]",
@@ -669,126 +738,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('LS_CHILD_SS_MAXVALUE_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_KeyVault_SqlServer')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked service key vault Sql server",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_server')]",
-					"database": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_userName')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "LS_AKV_SQLSERVER",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "Password"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_LKUP_MAXVALUE')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked storage max value",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_LKUP_MAXVALUE_properties_typeProperties_server')]",
-					"database": "[parameters('LS_LKUP_MAXVALUE_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_LKUP_MAXVALUE_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_LKUP_MAXVALUE_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_LKUP_SQLSERVER')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked service look up sql server",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_LKUP_SQLSERVER_properties_typeProperties_server')]",
-					"database": "[parameters('LS_LKUP_SQLSERVER_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_LKUP_SQLSERVER_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_LKUP_SQLSERVER_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfhostIntegrationruntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostIntegrationruntime')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_MAX_WATERMRK_COLMN')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Linked storage watermark column",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_MAX_WATERMRK_COLMN_properties_typeProperties_server')]",
-					"database": "[parameters('LS_MAX_WATERMRK_COLMN_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_MAX_WATERMRK_COLMN_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_MAX_WATERMRK_COLMN_password')]"
 					}
 				},
 				"connectVia": {

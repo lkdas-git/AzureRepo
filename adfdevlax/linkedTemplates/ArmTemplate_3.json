@@ -7,6 +7,18 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevlax"
 		},
+		"LS_LKUP_MAXVALUE_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_LKUP_MAXVALUE'"
+		},
+		"LS_LKUP_SQLSERVER_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_LKUP_SQLSERVER'"
+		},
+		"LS_MAX_WATERMRK_COLMN_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_MAX_WATERMRK_COLMN'"
+		},
 		"LS_MIGRT_SQLSERVER_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_MIGRT_SQLSERVER'"
@@ -34,6 +46,54 @@
 		"LS_SQL_MIGRATION_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SQL_MIGRATION'"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VISIONBOARD"
+		},
+		"LS_KeyVault_SqlServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
+		},
+		"LS_LKUP_MAXVALUE_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_LKUP_MAXVALUE_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VBMIGDEV"
+		},
+		"LS_LKUP_MAXVALUE_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
+		},
+		"LS_LKUP_SQLSERVER_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_LKUP_SQLSERVER_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VISIONBOARD"
+		},
+		"LS_LKUP_SQLSERVER_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
+		},
+		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-826T6E8O\\SQLEXPRESS"
+		},
+		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VBMIGDEV"
+		},
+		"LS_MAX_WATERMRK_COLMN_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lkdvb"
 		},
 		"LS_MIGRT_SQLSERVER_properties_typeProperties_server": {
 			"type": "string",
@@ -124,6 +184,118 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_KeyVault_SqlServer')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service key vault Sql server",
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_server')]",
+					"database": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_KeyVault_SqlServer_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "LS_AKV_SQLSERVER",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "Password"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfhostIntegrationruntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_LKUP_MAXVALUE')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked storage max value",
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS_LKUP_MAXVALUE_properties_typeProperties_server')]",
+					"database": "[parameters('LS_LKUP_MAXVALUE_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_LKUP_MAXVALUE_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_LKUP_MAXVALUE_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfhostIntegrationruntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_LKUP_SQLSERVER')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service look up sql server",
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS_LKUP_SQLSERVER_properties_typeProperties_server')]",
+					"database": "[parameters('LS_LKUP_SQLSERVER_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_LKUP_SQLSERVER_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_LKUP_SQLSERVER_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfhostIntegrationruntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_MAX_WATERMRK_COLMN')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked storage watermark column",
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS_MAX_WATERMRK_COLMN_properties_typeProperties_server')]",
+					"database": "[parameters('LS_MAX_WATERMRK_COLMN_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_MAX_WATERMRK_COLMN_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_MAX_WATERMRK_COLMN_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfhostIntegrationruntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_MIGRT_SQLSERVER')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -310,6 +482,80 @@
 					"referenceName": "SelfhostIntegrationruntime",
 					"type": "IntegrationRuntimeReference"
 				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_CPY_CTE_BLKUPLD')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Bulk upload for CSV",
+				"activities": [
+					{
+						"name": "PL_CPY_CTE_BLKUPLD",
+						"description": "PL_CPY_CTE_BLKUPLD",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_SRC_CTE_BLKUPLD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_TGT_CTE_BLKUPLD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
