@@ -1,0 +1,18 @@
+{
+	"name": "LS_AZR_SQL_DB",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Linked service for Azure DB",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sql-srvr-lkd-dev.database.windows.net",
+			"database": "sql-db-lkd-dev",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "lkdas",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDdFRDY4OTkwLTNFM0YtNEE1NS1BNjlFLTUwRkIzMEIyRjgyMV82MDg2ODM4MC01MGFjLTQ3ZmQtYWNjMi00YTk2ZDA0YzdkNDQiDQp9"
+		}
+	}
+}
