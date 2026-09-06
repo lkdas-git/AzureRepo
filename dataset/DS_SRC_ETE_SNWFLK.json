@@ -1,0 +1,16 @@
+{
+	"name": "DS_SRC_ETE_SNWFLK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SRC_ETE_SNWFLK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [],
+		"typeProperties": {
+			"schema": "AZURE_INTEGRATION",
+			"table": "ORDER_ITEMS_DATASET"
+		}
+	}
+}
