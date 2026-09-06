@@ -19,7 +19,10 @@
 					"value": "@dataset().FileName",
 					"type": "Expression"
 				},
-				"folderPath": "sql",
+				"folderPath": {
+					"value": "@concat(\n'sql/',\nformatDateTime(utcNow(),'yyyy'),'/',\nformatDateTime(utcNow(),'MM'),'/',\nformatDateTime(utcNow(),'dd'),'/'\n)\n",
+					"type": "Expression"
+				},
 				"fileSystem": "output"
 			},
 			"compressionCodec": "snappy"
