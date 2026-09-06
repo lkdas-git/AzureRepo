@@ -60,6 +60,10 @@
 									},
 									"userProperties": [],
 									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_CPY_ETE_CSV",
+											"type": "PipelineReference"
+										},
 										"waitOnCompletion": true
 									}
 								}
