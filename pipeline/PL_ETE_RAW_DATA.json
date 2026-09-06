@@ -49,7 +49,31 @@
 					},
 					"cases": [
 						{
-							"value": "CloudStorage"
+							"value": "CloudStorage",
+							"activities": [
+								{
+									"name": "PL_EXC_RAW_DATA",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_ETE_CLD_STG_CSV",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
 						}
 					]
 				}

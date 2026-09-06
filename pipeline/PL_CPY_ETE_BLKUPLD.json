@@ -1,5 +1,5 @@
 {
-	"name": "PL_CPY_CTE_BLKUPLD",
+	"name": "PL_CPY_ETE_BLKUPLD",
 	"properties": {
 		"description": "Bulk upload for CSV",
 		"activities": [
