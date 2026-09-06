@@ -1,0 +1,12 @@
+{
+	"name": "DS_ETE_CLD_STRG_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETE_CLD_STRG_CSV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}

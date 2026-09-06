@@ -1,0 +1,70 @@
+{
+	"name": "PL_ETE_CLD_STG_CSV",
+	"properties": {
+		"activities": [
+			{
+				"name": "LKP_ETE_CLD_STG_CSV",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "SELECT DISTINCT L3_switch_type\nFROM dbo.vb_tbl_job a\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_ETE_CLD_STRG_CSV",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "SWITCH_CLD_STG_CSV",
+				"type": "Switch",
+				"dependsOn": [
+					{
+						"activity": "LKP_ETE_CLD_STG_CSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@activity('LKP_ETE_CLD_STG_CSV').output.firstRow.L3_switch_type",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "Azure"
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"Trigger": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"Mapping": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
