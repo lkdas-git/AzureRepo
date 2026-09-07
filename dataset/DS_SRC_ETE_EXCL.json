@@ -8,6 +8,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Worksheet",
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "order_reviews_dataset.xlsx",
