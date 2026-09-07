@@ -64,7 +64,13 @@
 											"referenceName": "PL_CPY_ETE_EXCEL",
 											"type": "PipelineReference"
 										},
-										"waitOnCompletion": true
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
 									}
 								}
 							]
@@ -85,7 +91,13 @@
 											"referenceName": "PL_CPY_ETE_EXCEL1",
 											"type": "PipelineReference"
 										},
-										"waitOnCompletion": true
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
 									}
 								}
 							]
