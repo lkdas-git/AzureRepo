@@ -1,0 +1,12 @@
+{
+	"name": "DS_ETE_SWTCH4_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETE_SWTCH4_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}

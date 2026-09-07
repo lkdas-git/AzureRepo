@@ -1,9 +1,9 @@
 {
-	"name": "PL_ETE_CLD_STG_CSV",
+	"name": "PL_ETE_AZR_CSV_EXCEL",
 	"properties": {
 		"activities": [
 			{
-				"name": "LKP_ETE_CLD_STG_CSV",
+				"name": "LKP_Switch4",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -18,24 +18,24 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT DISTINCT L3_switch_type\nFROM dbo.vb_tbl_job a\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'\n",
+							"value": "SELECT DISTINCT L4_switch_type\nFROM dbo.vb_tbl_job a\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'\n",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DS_ETE_CLD_STRG_CSV",
+						"referenceName": "DS_ETE_SWTCH4_SQL",
 						"type": "DatasetReference"
 					}
 				}
 			},
 			{
-				"name": "SWITCH_CLD_STG_CSV",
+				"name": "SWTCH4_CSV_EXCL",
 				"type": "Switch",
 				"dependsOn": [
 					{
-						"activity": "LKP_ETE_CLD_STG_CSV",
+						"activity": "LKP_Switch4",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -44,15 +44,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"on": {
-						"value": "@activity('LKP_ETE_CLD_STG_CSV').output.firstRow.L3_switch_type",
+						"value": "@activity('LKP_Switch4').output.firstRow.L4_switch_type",
 						"type": "Expression"
 					},
 					"cases": [
 						{
-							"value": "Azure",
+							"value": "csv",
 							"activities": [
 								{
-									"name": "PL_EXC_CLD_STG_CSV",
+									"name": "EXEC_CLD_CSV",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
 									"policy": {
@@ -61,7 +61,28 @@
 									"userProperties": [],
 									"typeProperties": {
 										"pipeline": {
-											"referenceName": "PL_ETE_AZR_CSV_EXCEL",
+											"referenceName": "PL_CPY_ETE_EXCEL",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
+						},
+						{
+							"value": "excel",
+							"activities": [
+								{
+									"name": "EXEC_CLD_EXCL",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_CPY_ETE_EXCEL1",
 											"type": "PipelineReference"
 										},
 										"waitOnCompletion": true
