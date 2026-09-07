@@ -1,0 +1,17 @@
+{
+	"name": "DS_ETE_EXCL_GMD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ETE_EXCL_GMD",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "input"
+			}
+		}
+	}
+}
