@@ -53,6 +53,25 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "ForEach_ETE_EXCL",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Filter_ETE_EXCL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Filter_ETE_EXCL').output.value",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
