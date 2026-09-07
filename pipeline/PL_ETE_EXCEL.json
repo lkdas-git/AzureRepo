@@ -70,7 +70,53 @@
 					"items": {
 						"value": "@activity('Filter_ETE_EXCL').output.value",
 						"type": "Expression"
-					}
+					},
+					"activities": [
+						{
+							"name": "IF_ETE_EXCL_CSV",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@endsWith(toLower(item().name), '.xlsx')",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "CPY_ETE_EXL_ADLS",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "ExcelSource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "DS_SRC_ETE_EXCL",
+												"type": "DatasetReference"
+											}
+										]
+									}
+								]
+							}
+						}
+					]
 				}
 			}
 		],
