@@ -10,7 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "excel",
+				"folderPath": {
+					"value": "@concat(\n'excel/',\nformatDateTime(utcNow(),'yyyy'),'/',\nformatDateTime(utcNow(),'MM'),'/',\nformatDateTime(utcNow(),'dd'),'/'\n)\n",
+					"type": "Expression"
+				},
 				"fileSystem": "output"
 			},
 			"compressionCodec": "snappy"
