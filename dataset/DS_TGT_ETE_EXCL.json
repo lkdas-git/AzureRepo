@@ -1,0 +1,20 @@
+{
+	"name": "DS_TGT_ETE_EXCL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_TGT_ETE_EXCL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "excel",
+				"fileSystem": "output"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
