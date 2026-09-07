@@ -1,0 +1,23 @@
+{
+	"name": "DS_CPY_ETE_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CPY_ETE_CSV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "order_reviews_dataset.csv",
+				"fileSystem": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
