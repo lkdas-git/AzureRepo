@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "order_reviews_dataset.csv",
 				"fileSystem": "input"
 			},
 			"columnDelimiter": ",",
