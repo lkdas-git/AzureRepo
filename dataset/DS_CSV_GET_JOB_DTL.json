@@ -1,0 +1,12 @@
+{
+	"name": "DS_CSV_GET_JOB_DTL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CSV_GET_JOB_DTL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
