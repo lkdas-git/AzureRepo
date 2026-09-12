@@ -74,6 +74,27 @@
 									}
 								}
 							]
+						},
+						{
+							"value": "API",
+							"activities": [
+								{
+									"name": "PL_EXEC-API",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_CPY_ETE_RESTAPI",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
 						}
 					]
 				}
