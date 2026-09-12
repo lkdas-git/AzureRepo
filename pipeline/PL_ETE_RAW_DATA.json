@@ -101,6 +101,27 @@
 									}
 								}
 							]
+						},
+						{
+							"value": "bulk",
+							"activities": [
+								{
+									"name": "PL_EXEC_BULK",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_CPY_ETE_BLKUPLD",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
 						}
 					]
 				}
