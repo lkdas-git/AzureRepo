@@ -9,7 +9,13 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "LKP_GET_JOB_DTL",
+						"activity": "SP_START_LOG_ENTRY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "SET_MAP_VARIABLE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -99,6 +105,63 @@
 						"referenceName": "DS_CSV_GET_JOB_DTL",
 						"type": "DatasetReference"
 					}
+				}
+			},
+			{
+				"name": "SP_START_LOG_ENTRY",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "LKP_GET_JOB_DTL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[vb_start_log_entry]",
+					"storedProcedureParameters": {
+						"jobid": {
+							"value": {
+								"value": "jobid @activity('LKP_GET_JOB_DTL').output.firstRow.jobid",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"pipeline_id": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_AZR_SQL_DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SET_MAP_VARIABLE",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Mapping",
+					"value": ""
 				}
 			}
 		],
