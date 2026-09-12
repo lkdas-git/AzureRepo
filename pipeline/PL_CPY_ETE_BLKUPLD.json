@@ -82,15 +82,9 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderStoredProcedureName": "[dbo].[vb_get_job_dtls]",
-						"storedProcedureParameters": {
-							"TriggerName": {
-								"type": "String",
-								"value": {
-									"value": "@pipeline().parameters.Trigger",
-									"type": "Expression"
-								}
-							}
+						"sqlReaderQuery": {
+							"value": "SELECT distinct jobid\nFROM dbo.vb_tbl_job a\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'",
+							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
