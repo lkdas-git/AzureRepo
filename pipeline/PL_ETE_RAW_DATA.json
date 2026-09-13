@@ -209,6 +209,33 @@
 									}
 								}
 							]
+						},
+						{
+							"value": "snowflake",
+							"activities": [
+								{
+									"name": "PL_EXEC_SNWFLK",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_CPY_ETE_SNWFLK",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
 						}
 					]
 				}
