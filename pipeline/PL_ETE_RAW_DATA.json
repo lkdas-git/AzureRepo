@@ -155,6 +155,27 @@
 									}
 								}
 							]
+						},
+						{
+							"value": "jason",
+							"activities": [
+								{
+									"name": "PL_EXEC_JASON",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_CPY_ETE_JASON",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
 						}
 					]
 				}
