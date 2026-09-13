@@ -100,33 +100,9 @@
 					},
 					"activities": [
 						{
-							"name": "SET_VAR_MASTER",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "Trigger_variable",
-								"value": {
-									"value": "@item().Trigger\n",
-									"type": "Expression"
-								}
-							}
-						},
-						{
 							"name": "PL_EXEC_MASTER",
 							"type": "ExecutePipeline",
-							"dependsOn": [
-								{
-									"activity": "SET_VAR_MASTER",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"policy": {
 								"secureInput": false
 							},
@@ -139,7 +115,7 @@
 								"waitOnCompletion": true,
 								"parameters": {
 									"Trigger": {
-										"value": "@variables('Trigger_variable')",
+										"value": "@item().Trigger",
 										"type": "Expression"
 									}
 								}
@@ -149,16 +125,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"Trigger": {
-				"type": "string"
-			}
-		},
-		"variables": {
-			"Trigger_variable": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
