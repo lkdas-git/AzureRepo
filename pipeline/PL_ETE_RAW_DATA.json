@@ -128,6 +128,27 @@
 									}
 								}
 							]
+						},
+						{
+							"value": "sftp",
+							"activities": [
+								{
+									"name": "PL_EXEC_SFTP",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_CPY_ETE_SFTP",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
 						}
 					]
 				}
