@@ -182,6 +182,27 @@
 									}
 								}
 							]
+						},
+						{
+							"value": "sql",
+							"activities": [
+								{
+									"name": "PL_EXEC_SQL",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_LKP_ETE_SQLSRVR",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
 						}
 					]
 				}
