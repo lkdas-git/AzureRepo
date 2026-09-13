@@ -1,0 +1,26 @@
+{
+	"name": "TRIGGER_ETE",
+	"properties": {
+		"description": "Trigger end to end data flow",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_ETE_MASTER",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2026-09-14T11:00:00",
+				"endTime": "2026-09-14T21:32:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
