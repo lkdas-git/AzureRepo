@@ -51,6 +51,8 @@
 						{
 							"name": "CPY_ETE_SQLSRVR",
 							"type": "Copy",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "SP-START-LOG-ENTRY6",
@@ -195,6 +197,8 @@
 						{
 							"name": "SP-SUCESS-LOG-ENTRY6",
 							"type": "SqlServerStoredProcedure",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "CPY_ETE_SQLSRVR",
@@ -242,6 +246,8 @@
 						{
 							"name": "SP-FAIL-LOG-ENTRY6",
 							"type": "SqlServerStoredProcedure",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "CPY_ETE_SQLSRVR",
