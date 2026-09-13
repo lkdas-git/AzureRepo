@@ -65,8 +65,6 @@
 			{
 				"name": "LKP_ETE_SNWFLK",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -95,8 +93,6 @@
 			{
 				"name": "SP-START-LOG-ENTRY7",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "LKP_ETE_SNWFLK",
@@ -140,8 +136,6 @@
 			{
 				"name": "SP-SUCESS-LOG-ENTRY7",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "CPY_BLOB_ADLS2_ETE",
@@ -189,8 +183,6 @@
 			{
 				"name": "SP-FAIL-LOG-ENTRY7",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "CPY_ETE_SNWFLK",
