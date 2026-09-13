@@ -65,6 +65,8 @@
 			{
 				"name": "LKP_ETE_SNWFLK",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -93,6 +95,8 @@
 			{
 				"name": "SP-START-LOG-ENTRY7",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "LKP_ETE_SNWFLK",
@@ -136,9 +140,11 @@
 			{
 				"name": "SP-SUCESS-LOG-ENTRY7",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "CPY_ETE_SNWFLK",
+						"activity": "CPY_BLOB_ADLS2_ETE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -183,9 +189,17 @@
 			{
 				"name": "SP-FAIL-LOG-ENTRY7",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "CPY_ETE_SNWFLK",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "CPY_BLOB_ADLS2_ETE",
 						"dependencyConditions": [
 							"Failed"
 						]
@@ -229,6 +243,69 @@
 					"referenceName": "LS_AZR_SQL_DB",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "CPY_BLOB_ADLS2_ETE",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CPY_ETE_SNWFLK",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_SRC_BLOB_ADLS2_ETE",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_TGT_BLOB_ADLS2_ETE",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {
