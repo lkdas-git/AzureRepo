@@ -88,7 +88,7 @@
 									"userProperties": [],
 									"typeProperties": {
 										"pipeline": {
-											"referenceName": "PL_CPY_ETE_EXCEL1",
+											"referenceName": "PL_ETE_EXCEL",
 											"type": "PipelineReference"
 										},
 										"waitOnCompletion": true,
