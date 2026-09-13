@@ -157,7 +157,7 @@
 							]
 						},
 						{
-							"value": "jason",
+							"value": "json",
 							"activities": [
 								{
 									"name": "PL_EXEC_JASON",
