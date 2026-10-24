@@ -76,6 +76,8 @@
 			{
 				"name": "LKP_CSV_ADLS_ETE",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -110,6 +112,8 @@
 			{
 				"name": "SP-START-LOG-ENTRY10",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "LKP_CSV_ADLS_ETE",
@@ -153,6 +157,8 @@
 			{
 				"name": "SP-SUCESS-LOG-ENTRY10",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "PL_CPY_ETE_CSV",
@@ -200,6 +206,8 @@
 			{
 				"name": "SP-FAIL-LOG-ENTRY10",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "PL_CPY_ETE_CSV",
@@ -250,6 +258,8 @@
 			{
 				"name": "SET_MAP_VAR2",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"secureOutput": false,
