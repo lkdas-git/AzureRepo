@@ -1,0 +1,15 @@
+{
+	"name": "adfdevlkdv0",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b645b5e3-54bf-4604-84cb-a0d831df7473",
+		"tenantId": "389aa3c7-f110-4729-b847-9a53cd6f9904"
+	}
+}
