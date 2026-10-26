@@ -1,0 +1,12 @@
+{
+	"name": "AzureDatabricks1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-7405609060651894.14.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/9dc86b32-f363-4fe8-b6c8-90a2be70600b/resourceGroups/rg_dev_lkd/providers/Microsoft.Databricks/workspaces/adbdevlkd"
+		}
+	}
+}
